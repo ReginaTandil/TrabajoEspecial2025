@@ -1,10 +1,9 @@
 import utils.Maquina;
 
 
-public class Backtraking extends Tecnica{
+public class Backtracking extends Tecnica{
   
-    
-    public Backtraking(String pathMaquinas){
+    public Backtracking(String pathMaquinas){
         super(pathMaquinas);
     }
     //Metodo de busqueda recursivo:
@@ -13,7 +12,7 @@ public class Backtraking extends Tecnica{
     //En cada recursion la lista de maquinas se mantiene completa(se puede repetir el uso de una misma maquina)
     //Con cada llamado a recursion, se genera un nuevo estado parcial, mientras se va recorriendo una rama del arbol
     //En cada llamada a recursion, se verifica el corte de la recursion, lo que significa que llegue a un estado 
-    //solucion; y luego verificamos si ese estado puede ser solucion final(mejor solucion, mas optima)
+    //final; y luego verificamos si ese estado puede ser solucion(mejor solucion, mas optima)
     //Mientras se avanza en el recorrido del arbol(avanzamos en las recursiones) se utilizan estrategias de poda
     //del arbol, mecanismos que nos permiten no avanzar en la recursion, cortando esa rama(camino) del arbol,
     //porque por esa rama no llegaremos a una solucion final. Se vuelve innecesario avanzar por esa rama, se poda
@@ -24,10 +23,15 @@ public class Backtraking extends Tecnica{
     //porque recorre todo el arbol.
     
     public void configuracionOptima(){
-        Integer faltantes=0;
-         configuracionOptima(faltantes);
-           System.out.println("Backtraking\nConfiguracion optima:" + solucion +"\ncantidad de piezas producidas:" + this.piezasTotales+"\ncantidad de puestas en funcionamiento:" + solucion.size()+"\ncosto de la solucion:" + estado);     
-    }
+         configuracionOptima(0);
+          if(!solucion.isEmpty()){
+           System.out.println("Backtracking\nConfiguracion optima:" + solucion +"\ncantidad de piezas producidas:" + this.piezasTotales+"\ncantidad de puestas en funcionamiento:" + solucion.size()+"\ncosto de la solucion:" + estado);     
+          }
+          else{
+           System.out.println("Backtracking:\nNo existe solucion, para la cantidad de piezas dadas");
+          }
+          }
+
     private void configuracionOptima(Integer faltantes){
        incrementarEstado();
         if(piezasTotales==faltantes){

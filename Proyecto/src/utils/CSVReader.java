@@ -13,8 +13,8 @@ public class CSVReader {
       public CSVReader() {      
 	   }
     
-	public LinkedList<Integer> read1(String path) {
-      LinkedList<Integer>cantidad=new LinkedList<>();
+	public Integer read1(String path) {
+      Integer cantidad=0;
 		try{
                 List<List<String>>data=new ArrayList<>();
                 String file=path;
@@ -29,9 +29,8 @@ public class CSVReader {
                 }
                 for(List<String>list:data){
                   for(String str:list){
-                     if(str.equals("12")){
-                        Integer piezas_totales=Integer.parseInt(str);
-                        cantidad.add(piezas_totales);
+                     if(str!=null){
+                        cantidad=Integer.parseInt(str);
                      }
                   }        
                 }

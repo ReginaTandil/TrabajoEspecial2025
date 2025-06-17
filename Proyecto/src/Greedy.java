@@ -7,8 +7,8 @@ public class Greedy extends Tecnica {
        super(pathMaquinas);
     }
     //Metodo de busqueda iterativo, no recursivo:
-    //Los candidatos son todas las maquinas de la lista(se pueden repetir) y mientras existan piezas por producir
-    //y no exista solucion(conbinacion mas optima de maquinas), es que voy a continuar seleccionando candidatos
+    //Los candidatos a seleccionar son todas las maquinas de la lista y mientras existan maquinas 
+    //y no exista solucion (combinacion mas optima de maquinas), es que voy a continuar seleccionando candidatos
     //La funcion seleccion() es quien implementa la Estrategia Greedy: vamos a ir seleccionando en primer lugar 
     //aquellas maquinas con mayor cantidad de piezas a producir; con el fin de alcanzar antes la cantidad de 
     //piezas totales a producir con la menor cantidad de maquinas en funcionamiento.
@@ -21,24 +21,25 @@ public class Greedy extends Tecnica {
     //Es un metodo de busqueda polinomial, NO SIEMPRE encuentra (de existir) la mejor solucion.
     //Respecto al tiempo computacional: es una algoritmo de busqueda mas rapido, no genera llamadas recursivas 
     //y no explora un arbol; pero no asegura que de existir solucion la encuentre.
-    //Una forma de utilizarlo es como una aproximacion a mejor una solucion, aplico Greddy y esa solucion sera 
+    //Una forma de utilizarlo es como una aproximacion a una mejor una solucion, aplico Greedy y esa solucion sera 
     //implementada como una estrategia de poda en el algoritmo de busqueda backtracking: asegurandome de 
     //encontrar si o si la mejor solucion y en el menor tiempo de busqueda.
 
     public void ConfiguracionOptima(){
-        while(piezasTotales>0 && !existeSolucion()){
-        incrementarEstado();   
-         Maquina candidata=seleccionar();
-          if(esFactible(candidata)){
-            solucion.add(candidata);
-              decrementar(candidata);
-          }   
+        while(!maquinas.isEmpty() && !existeSolucion()){
+         incrementarEstado();   
+          Maquina candidata=seleccionar();
+           maquinas.remove(candidata);
+            if(esFactible(candidata)){
+              solucion.add(candidata);
+               decrementar(candidata);
+            } 
         }
         if(existeSolucion()){
-           System.out.println("Greedy\nConfiguracion optima:" + solucion +"\ncantidad de piezas producidas:" + this.sumar()+"\ncantidad de puestas en funcionamiento:" + solucion.size()+"\ncosto de la solucion:" + estado); 
+           System.out.println("Greedy:\nConfiguracion optima:" + solucion +"\ncantidad de piezas producidas:" + this.sumar()+"\ncantidad de puestas en funcionamiento:" + solucion.size()+"\ncosto de la solucion:" + estado); 
         }
         else{
-            System.out.println("No existe solucion");
+           System.out.println("Greedy:\nNo existe solucion, para la cantidad de piezas dadas");
         }
     }
 }

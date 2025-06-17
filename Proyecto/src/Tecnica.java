@@ -2,20 +2,23 @@ import java.util.LinkedList;
 import utils.CSVReader;
 import utils.Maquina;
 
+//Se implementa un diseño de herencia con el fin de reutilizar codigo, sin repetir.
+//una clase padre: Tecnica, que levanta a memoria una lista de las maquinas disponibles para producir, 
+//la cantidad de piezas que cada una puede producir y las piezas totales a producir. 
+//las clases que extienden de tecnica: clase Backtracking y clase Greedy, ambas tecnicas de busqueda de la
+//configaracion optima de maquinas.
 
 public class Tecnica {
     protected LinkedList<Maquina>maquinas;
-    protected LinkedList<Maquina>solucion;
-    protected LinkedList<Integer>piezas;
     protected Integer piezasTotales;
+    protected LinkedList<Maquina>solucion;
     protected LinkedList<Maquina>parcial;
     protected Integer estado;
 
     public Tecnica(String pathMaquinas){
         CSVReader reader=new CSVReader();
         this.maquinas=reader.read2(pathMaquinas);
-        this.piezas=reader.read1(pathMaquinas);
-        this.piezasTotales=piezas.get(0);
+        this.piezasTotales=reader.read1(pathMaquinas);
         this.solucion=new LinkedList<>();
         this.parcial=new LinkedList<>();
         this.estado=0;
@@ -50,7 +53,7 @@ public class Tecnica {
     }
     
     public boolean existeSolucion(){
-       return piezasTotales==0;    
+       return piezasTotales==0;
     }
 
     public Integer sumar(){
@@ -65,7 +68,7 @@ public class Tecnica {
      Integer mayor=0;
      Maquina candidata=null;
         for(Maquina m:maquinas){
-          if(m.getPiezas()>mayor && m.getPiezas()<=piezasTotales){
+          if(m.getPiezas()>mayor){
             mayor=m.getPiezas();
             candidata=m;
           }  

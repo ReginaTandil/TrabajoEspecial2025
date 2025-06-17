@@ -26,7 +26,7 @@ public class Maquina {
     }
 
     public String toString(){
-        return this.nombre;
+        return this.nombre+":"+this.piezas;
     }
     
  
